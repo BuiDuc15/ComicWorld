@@ -1,0 +1,21 @@
+version: "3"
+services:
+  comicworlddb:
+    image: "mysql:8.0.29"
+    environment:
+      - MYSQL_ROOT_PASSWORD=comicworld
+      - MYSQL_DATABASE=comicworld
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "9988:3306"
+    volumes:
+      - D:/volume:/home
+  web:
+    image: "cuongnguyen71/comicworld-be:latest"
+    environment:
+      - _JAVA_OPTIONS=-Xmx3g
+    ports:
+      - "8080:8080"
+    depends_on:
+      - comicworlddb
+
